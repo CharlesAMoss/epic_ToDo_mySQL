@@ -14,6 +14,8 @@ When installing from source you may notice that once you have cloned this repo, 
 $ composer install
 ```
 
+[setting up mySQL database for this project](https://github.com/CharlesAMoss/epic_ToDo_mySQL/blob/master/SQL_todo_setup.md)
+
 _You then only need to start up a local PHP server from within the "web" directory within the project's folder and point your browser to whatever local host server you have created._
 
 ## Technologies Used
