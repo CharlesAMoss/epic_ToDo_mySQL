@@ -1,6 +1,13 @@
 <html>
     <head>
         <title>To Do List</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style>
+        .due{
+            color = red;
+        }
+        </style>
     </head>
     <body>
         <h1>All Your Tasks!</h1>
@@ -12,7 +19,9 @@
                     {% for task in tasks %}
                         <ul>
                             {% if task.getCategoryId == id %}
-                                <li>{{ task.getDescription }}</li>
+                                <li>{{ task.getDescription }}
+                                    <br><span class="due">{{ task.getDueDate }}</span>
+                                </li>
                             {% endif %}
                         </ul>
                     {% endfor %}

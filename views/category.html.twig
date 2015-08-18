@@ -1,6 +1,13 @@
 <html>
     <head>
-        <title></title>
+        <title>To Do List</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style>
+        .due{
+            color = red;
+        }
+        </style>
     </head>
     <body>
         <h1>{{ category.getName }}</h1>
@@ -9,7 +16,9 @@
             <p>Here are the tasks:</p>
             <ul>
                 {% for task in tasks %}
-                    <li>{{ task.getDescription }}</li>
+                    <li>{{ task.getDescription }}
+                        <br><span class="due">{{ task.getDueDate }}</span>
+                    </li>
                 {% endfor %}
             </ul>
         {% endif %}
@@ -20,6 +29,8 @@
             <input id="category_id" name="category_id" type="hidden" value="{{ category.getId() }}">
             <label for='description'>Task Description</label>
             <input id='description' name='description' type='text'>
+            <label for='due_date'>Due Date</label>
+            <input id='due_date' name='due_date' type='date'>
 
             <button type='submit'>Add task</button>
         </form>
