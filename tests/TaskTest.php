@@ -13,13 +13,13 @@
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-
     class TaskTest extends PHPUnit_Framework_TestCase
     {
 
         protected function tearDown()
         {
             Task::deleteAll();
+            Category::deleteAll();
         }
 
         function test_save()
@@ -101,11 +101,11 @@
 
             $description = "Wash the dog";
             $category_id = $test_category->getId();
-            $test_Task = new Task($description, $id, $category_id);
+            $test_task = new Task($description, $id, $category_id);
             $test_task->save();
 
             //Act
-            $result = $test_Task->getId();
+            $result = $test_task->getId();
 
             //Assert
             $this->assertEquals(true, is_numeric($result));
@@ -125,7 +125,7 @@
             $test_task->save();
 
             //Act
-            $restult = $test_task->getCategoryId();
+            $result = $test_task->getCategoryId();
 
             //Assert
             $this->assertEquals(true, is_numeric($result));
@@ -149,7 +149,7 @@
             $test_task2->save();
 
             //Act
-            $result = Task::find($test_task-getId());
+            $result = Task::find($test_task->getId());
 
             //Assert
             $this->assertEquals($test_task, $result);

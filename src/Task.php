@@ -2,14 +2,15 @@
 class Task
 {
     private $description;
+    private $category_id;
     private $id;
 
-    function __construct($description, $id=null)
+    function __construct($description, $id=null, $category_id)
     {
 
         $this->description = $description;
         $this->id =$id;
-
+        $this->category_id = $category_id;
     }
 
     function setDescription($new_description)
@@ -33,16 +34,15 @@ class Task
 
     }
 
-    // function save() {
-    //
-    //     array_push($_SESSION['list_of_tasks'], $this);
-    //
-    // }
+    function getCategoryId()
+    {
+        return $this->category_id;
+    }
 
     function save()
     {
 
-        $GLOBALS['DB']->exec("INSERT INTO tasks (description) VALUES ('{$this->getDescription()}');");
+        $statement = $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id) VALUES ('{$this->getDescription()}', {$this->getCategoryId()})");
         $this->id = $GLOBALS['DB']->lastInsertId();
 
     }
@@ -60,12 +60,6 @@ class Task
         return $found_task;
     }
 
-    // static function getAll() {
-    //
-    //     return $_SESSION['list_of_tasks'];
-    //
-    // }
-
     static function getAll()
     {
         $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks;");
@@ -73,18 +67,13 @@ class Task
         foreach($returned_tasks as $task) {
             $description = $task['description'];
             $id = $task['id'];
-            $new_task = new Task($description, $id);
+            $category_id = $task['category_id'];
+            $new_task = new Task($description, $id, $category_id);
             array_push($tasks, $new_task);
         }
 
         return $tasks;
     }
-
-    // static function deleteAll() {
-    //
-    //     $_SESSION['list_of_tasks'] = array();
-    //
-    // }
 
     static function deleteAll()
     {
