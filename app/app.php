@@ -9,8 +9,10 @@
     //    $_SESSION['list_of_tasks'] = array();
     //}
 
-    $app = new Silex\Application();
 
+
+    $app = new Silex\Application();
+    $app['debug'] = true;
     $server = 'mysql:host=localhost;dbname=to_do';
     $username = 'root';
     $password = 'root';
@@ -59,7 +61,7 @@
     $app->post("/delete_categories", function() use ($app) {
         Task::deleteAll();
         Category::deleteAll();
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
     $app->post("/delete_tasks", function() use ($app) {
@@ -68,7 +70,9 @@
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
-    
+    $app->get("/all_tasks", function() use ($app) {
+        return $app['twig']->render('all_tasks.html.twig', array('tasks' => Task::getAll(), 'categories' => Category::getAll()));
+    });
 
     return $app;
  ?>
