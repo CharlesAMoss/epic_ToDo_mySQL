@@ -47,6 +47,15 @@ class Task
 
     }
 
+    static function deleteTasks($category_id)
+    {
+        $tasks = Task::getAll();
+        foreach($tasks as $task)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM tasks WHERE category_id=$category_id;");
+        }
+    }
+
     static function find($search_id)
     {
         $found_task = null;
