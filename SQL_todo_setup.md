@@ -6,7 +6,7 @@ $ mysql.server start
 ```
 followed by the command
 ```
-$ mysql -uroot -proot.
+$ mysql -uroot -proot
 ```
 
 If you're working with MAMP at home, once you've started the servers, you can access your MySQL terminal by entering:
