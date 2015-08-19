@@ -1,6 +1,6 @@
 ## _Start UP:_
 
-To access the MySQL shell at Epicodus, open the bash terminal and run:
+To access the MySQL shell, open the bash terminal and run:
 ```
 $ mysql.server start
 ```
